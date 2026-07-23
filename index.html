@@ -2606,19 +2606,19 @@ let collocSessionDeck = [];
 let collocSessionIndex = 0;
 
 function collocBuildPrompt(word) {
-  return `Bạn là chuyên gia biên soạn từ điển Hán ngữ. Hãy tra cứu từ/chữ Hán dưới đây theo phong cách và phạm vi dữ liệu tương tự trang từ điển Hanzii.net (cụm từ cố định, từ ngữ liên quan thường gặp trong thực tế).
+  return `Bạn là chuyên gia giảng dạy tiếng Trung giao tiếp thực tế. Hãy tra cứu từ/chữ Hán dưới đây theo phong cách kết hợp giữa kho từ vựng phong phú của Hanzii.net và tính ứng dụng cao trong đời sống thường ngày.
 
 Từ cần tra cứu: "${word}"
 
 Nhiệm vụ:
 1. Xác định Pinyin chuẩn và nghĩa tiếng Việt ngắn gọn của từ này.
-2. Liệt kê các cụm từ cố định / collocation thường gặp có chứa từ này, PHÂN LOẠI theo đúng 4 khung trình độ HSK với SỐ LƯỢNG CHÍNH XÁC bắt buộc:
-   - "hsk1-2": đúng 3 cụm từ (đơn giản, thông dụng nhất)
-   - "hsk3-4": đúng 5 cụm từ (trung cấp)
-   - "hsk5-6": đúng 7 cụm từ (trung cao cấp)
-   - "hsk7-9": đúng 10 cụm từ (nâng cao, học thuật/văn viết)
-   Mỗi cụm từ gồm: cụm từ chữ Hán, pinyin, nghĩa tiếng Việt, một câu ví dụ tiếng Trung có chứa cụm từ đó, bản dịch tiếng Việt của câu ví dụ, và một câu "cloze" (câu ví dụ nhưng thay cụm từ bằng dấu gạch dưới ___ để luyện điền từ).
-3. CHỈ trả lời bằng một khối JSON hợp lệ DUY NHẤT, không kèm lời dẫn, không dùng markdown code fence, đúng cấu trúc mẫu sau:
+2. Liệt kê các cụm từ cố định/ cụm từ liên quan (Collocation) thường gặp có chứa từ này, PHÂN LOẠI theo đúng 4 khung trình độ HSK với SỐ LƯỢNG CHÍNH XÁC bắt buộc. Tiêu chí chọn cụm từ: Ưu tiên các cụm từ mang tính KHẨU NGỮ, GIAO TIẾP đời sống, công sở hoặc phim ảnh, giúp người học có thể áp dụng nói chuyện được ngay:
+   - "hsk1-2": đúng 3 cụm từ (giao tiếp cơ bản, đời sống hằng ngày)
+   - "hsk3-4": đúng 5 cụm từ (giao tiếp trung cấp, diễn đạt cảm xúc, công việc đơn giản)
+   - "hsk5-6": đúng 7 cụm từ (giao tiếp chuyên sâu, thành ngữ văn nói thông dụng, công sở nâng cao)
+   - "hsk7-9": đúng 10 cụm từ (biểu đạt tinh tế, sắc thái nâng cao nhưng vẫn mang tính ứng dụng cao)
+   Mỗi cụm từ gồm: cụm từ chữ Hán, pinyin, nghĩa tiếng Việt, một câu ví dụ tiếng Trung GIAO TIẾP ngắn gọn, tự nhiên có chứa cụm từ đó, pinyin, bản dịch tiếng Việt của câu ví dụ, và một câu "cloze" (câu ví dụ nhưng thay cụm từ bằng dấu gạch dưới ___ để luyện điền từ).
+3. CHỈ trả lời bằng một khối JSON hợp lệ DUY NHẤT, không kèm lời dẫn, không dùng markdown code fence (không bọc trong \`\`\`json), đúng cấu trúc mẫu sau:
 {"word":"${word}","pinyin":"...","meaningVi":"...","levels":{"hsk1-2":[{"collocation":"...","pinyin":"...","meaningVi":"...","exampleZh":"...","exampleVi":"...","cloze":"..."}],"hsk3-4":[],"hsk5-6":[],"hsk7-9":[]}}`;
 }
 
