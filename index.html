@@ -2392,7 +2392,39 @@ document.getElementById('triggerCombinedAiBtn').addEventListener('click', async 
   btn.disabled = true;
   content.innerHTML = `<div class="text-center py-12"><span class="font-medium text-teal block animate-pulse">⏳ Gemini AI đang đồng thời phân tích, biên soạn 3 câu hỏi trắc nghiệm, bài tập đục lỗ và kịch bản Speaking 豆包...</span></div>`;
   
-  const prompt = `Bạn là huấn luyện viên AI cao cấp. Dựa trên bài khóa tiếng Trung này:\n\n${t.content}\n\nHãy sinh ra nội dung luyện tập toàn diện cấu trúc chuẩn Markdown như sau:\n\n### PART 1: ĐỌC HIỂU TRẮC NGHIỆM (3 CÂU)\nTạo 3 câu hỏi bằng tiếng Trung dạng trắc nghiệm A, B, C, D về nội dung bài khóa, có phần dịch câu hỏi sang tiếng Việt.\n\n### PART 2: ĐỤC LỖ CỦU BÀI KHÓA\nTrích xuất một đoạn văn ngắn trong bài khóa, thay thế ít nhất 3 từ khóa quan trọng bằng các ô trống ký hiệu [Ô TRỐNG 1], [Ô TRỐNG 2]... Cung cấp danh sách các từ bị khuyết bên dưới xáo trộn thứ tự để học viên tự chọn điền vào.\n\n### PART 3: KỊCH BẢN ĐÀM THOẠI 豆包 SPEAKING\nBiên soạn 1 đoạn hội thoại ngắn 4-6 câu mở rộng bối cảnh ứng dụng thực tế dựa trên bài khóa, kèm Pinyin và dịch nghĩa Việt nhằm luyện kỹ năng nói độc thoại/đối thoại.`;
+  const prompt = `Bạn là Huấn luyện viên AI HSK chuyên nghiệp. Dựa trên nội dung bài khóa sau:
+
+
+
+${t.content}
+
+
+
+Hãy thiết kế một bộ bài tập thực hành toàn diện gồm 2 phần chính bằng tiếng Trung hoàn toàn (để kiểm tra trình độ đọc hiểu và từ vựng):
+
+
+
+===PRACTICE_START===
+
+### PART 1: ĐỌC HIỂU TRẮC NGHIỆM (阅读理解)
+
+- Thiết kế các câu hỏi đọc hiểu bám sát nội dung bài khóa.
+
+- **Yêu cầu bắt buộc:** Toàn bộ nội dung câu hỏi (题干) và 4 phương án lựa chọn (A, B, C, D) phải được viết **hoàn toàn bằng tiếng Trung** (không dịch sẵn tiếng Việt trong phần câu hỏi và đáp án để học viên tự luyện đọc).
+
+- Cung cấp đáp án đúng ở cấu trúc ngầm định hoặc phía dưới để chấm bài.
+
+
+
+### PART 2: BÀI TẬP ĐỤC LỖ TỪ KHÓA (选词填空 / 完形填空)
+
+- Trích xuất các cụm từ quan trọng, từ khóa chính hoặc mẫu câu đắt giá nhất từ bài khóa.
+
+- Tạo các câu văn có chỗ trống (sử dụng ký hiệu _______ hoặc ( ) ) để học viên điền từ/cụm từ thích hợp vào.
+
+- Toàn bộ nội dung bài tập đục lỗ phải bằng tiếng Trung.
+
+===PRACTICE_END===`;
   
   const aiResult = await askAI(prompt);
   if (aiResult) {
