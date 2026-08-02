@@ -1338,48 +1338,7 @@ document.getElementById('analyzeLessonBtn').addEventListener('click', async ()=>
   resBox.innerHTML = '⏳ Đang phân tích bài khóa và quét cấu trúc bằng Gemini AI...';
 
   // Prompt cải tiến ép AI trả về định dạng bọc thẻ JSON phân tách dữ liệu rõ ràng
-  const result = await askAI(`Bạn là giáo viên HSK chuyên nghiệp.
-Phân tích bài khóa sau:
-
-${t.content}
-
-Hãy xuất kết quả chính xác tuyệt đối theo đúng cấu trúc gồm ĐÚNG CÁC PHẦN SAU (Bắt buộc không được bỏ sót bất kỳ mục nào):
-
-===ANALYSIS_START===
-# TỪ KHÓA CHÍNH
-- Chữ Hán
-- Pinyin
-- Loại từ
-- Nghĩa tiếng Việt
-- Thường dùng trong bối cảnh nào
-- Các cụm từ thường gặp
-
-# NGỮ PHÁP CẦN NHỚ
-- Cấu trúc
-- Ý nghĩa
-- Ví dụ trong bài
-
-# QUY TẮC GHÉP CÂU (Dựa trên hệ thống 365 quy tắc ghép câu tiếng Trung)
-- Liệt kê chi tiết các quy tắc liên kết câu, liên kết mệnh đề (như quan hệ nhân quả, chuyển ý, điều kiện, giả thiết, nhượng bộ, song song, tăng tiến...) xuất hiện trong bài khóa.
-- Chỉ rõ tên quy tắc, cách vận dụng và ví dụ thực tế trích từ bài khóa để học viên áp dụng vào đời sống.
-
-# MẪU CÂU ĐẮT GIÁ
-- Chọn lọc và liệt kê toàn bộ các mẫu câu hay, mang tính biểu đạt cao, tự nhiên như người bản xứ được sử dụng trong bài khóa (tuyệt đối không bỏ sót).
-- Kèm theo phiên âm Pinyin, nghĩa tiếng Việt và tình huống ứng dụng thực tế.
-
-# TÓM TẮT BÀI KHÓA
-
-# ĐIỂM QUAN TRỌNG CẦN THUỘC
-===ANALYSIS_END===
-
-===DATA_JSON_START===
-{
-  "collocations": ["Cụm từ 1", "Cụm từ 2", "Thành ngữ tiếng Trung hoặc tiếng Việt xuất hiện trong bài"],
-  "common_words": ["Các", "từ", "đơn", "hoặc", "chữ", "Hán", "rất", "thông", "dụng", "cần", "đánh", "dấu", "sao"]
-}
-===DATA_JSON_END===
-
-Lưu ý: Phần JSON nằm giữa ===DATA_JSON_START=== và ===DATA_JSON_END=== phải là JSON hợp lệ, không chứa ký tự markdown.`);
+  const result = await askAI(`Bạn là giáo viên HSK chuyên nghiệp.\nPhân tích bài khóa sau:\n\n${t.content}\n\nHãy xuất kết quả chính xác tuyệt đối theo đúng cấu trúc gồm ĐÚNG CÁC PHẦN SAU (Bắt buộc không được bỏ sót bất kỳ mục nào):\n\n===ANALYSIS_START===\n# TỪ KHÓA CHÍNH\n- Chữ Hán\n- Pinyin\n- Loại từ\n- Nghĩa tiếng Việt\n- Thường dùng trong bối cảnh nào\n- Các cụm từ thường gặp\n\n# NGỮ PHÁP CẦN NHỚ\n- Cấu trúc\n- Ý nghĩa\n- Ví dụ trong bài\n\n# QUY TẮC GHÉP CÂU (Dựa trên hệ thống 365 quy tắc ghép câu tiếng Trung)\n- Liệt kê chi tiết các quy tắc liên kết câu, liên kết mệnh đề (như quan hệ nhân quả, chuyển ý, điều kiện, giả thiết, nhượng bộ, song song, tăng tiến...) xuất hiện trong bài khóa.\n- Chỉ rõ tên quy tắc, cách vận dụng và ví dụ thực tế trích từ bài khóa để học viên áp dụng vào đời sống.\n\n# MẪU CÂU ĐẮT GIÁ\n- Chọn lọc và liệt kê toàn bộ các mẫu câu hay, mang tính biểu đạt cao, tự nhiên như người bản xứ được sử dụng trong bài khóa (tuyệt đối không bỏ sót).\n- Kèm theo phiên âm Pinyin, nghĩa tiếng Việt và tình huống ứng dụng thực tế.\n\n# TÓM TẮT BÀI KHÓA\n\n# ĐIỂM QUAN TRỌNG CẦN THUỘC\n===ANALYSIS_END===\n\n===DATA_JSON_START===\n{\n  "collocations": ["Cụm từ 1", "Cụm từ 2", "Thành ngữ tiếng Trung hoặc tiếng Việt xuất hiện trong bài"],\n  "common_words": ["Các", "từ", "đơn", "hoặc", "chữ", "Hán", "rất", "thông", "dụng", "cần", "đánh", "dấu", "sao"]\n}\n===DATA_JSON_END===\n\nLưu ý: Phần JSON nằm giữa ===DATA_JSON_START=== và ===DATA_JSON_END=== phải là JSON hợp lệ, không chứa ký tự markdown.`);
   
   if (result) {
     try {
